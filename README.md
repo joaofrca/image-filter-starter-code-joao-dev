@@ -3,7 +3,7 @@ https://github.com/joaofrca/image-filter-starter-code-joao-dev
 
 http://image-filter-starter-code-joao-dev.us-east-2.elasticbeanstalk.com/
 
-http://image-filter-starter-code-joao-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg
+http://image-filter-starter-code-joao-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg
 
 
 
