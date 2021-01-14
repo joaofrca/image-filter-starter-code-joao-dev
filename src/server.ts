@@ -30,7 +30,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
- app.get( "/filteredimage/", async (req:express.Request, res:express.Response ) => {
+  app.get( "/filteredimage/", async (req:express.Request, res:express.Response ) => {
     let { image_url } = req.query;
 
     if ( !image_url ) {
@@ -38,19 +38,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         .send(`image_url is required`);
     }
 
-    try {
-      const filteredpath: string = await filterImageFromURL(image_url);
-      await res.sendFile(filteredpath, (err: Error) => {
-         if (err) {
-          console.error(err);
-          return res.status(400).send(`Error sending the image.`);
-         }
-         deleteLocalFiles([filteredpath]);
-     });      
-    } catch(err) {
-      console.error(err);
-      return res.status(400).send(`Error sending the image.`);
-    }
+    
+    const filteredpath: string = await filterImageFromURL(image_url);
+    await res.sendFile(filteredpath, (err: Error) => {
+        if (err) {
+        console.error(err);
+        return res.status(400).send(`Error sending the image.`);
+        }
+        console.log("fds: " + filteredpath)
+        deleteLocalFiles([filteredpath]);
+    });      
+  
 
   } );
   
