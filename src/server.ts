@@ -30,7 +30,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
-  app.get( "/filteredimage/", async ( req, res ) => {
+ app.get( "/filteredimage/", async (req:express.Request, res:express.Response ) => {
     let { image_url } = req.query;
 
     if ( !image_url ) {
@@ -38,14 +38,18 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         .send(`image_url is required`);
     }
 
-    //check image_url regex?
-
     try {
-      const filteredpath = await filterImageFromURL(image_url);
-      res.send(filteredpath);
-      deleteLocalFiles([filteredpath]);
+      const filteredpath: string = await filterImageFromURL(image_url);
+      await res.sendFile(filteredpath, (err: Error) => {
+         if (err) {
+          console.error(err);
+          return res.status(400).send(`Error sending the image.`);
+         }
+         deleteLocalFiles([filteredpath]);
+     });      
     } catch(err) {
       console.error(err);
+      return res.status(400).send(`Error sending the image.`);
     }
 
   } );
